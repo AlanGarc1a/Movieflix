@@ -1,0 +1,19 @@
+{
+  "name": "movieflix",
+  "version": "1.0.0",
+  "description": "A web application for looking up movies and tv series",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlanGarc1a/Movieflix.git"
+  },
+  "author": "Alan Garcia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlanGarc1a/Movieflix/issues"
+  },
+  "homepage": "https://github.com/AlanGarc1a/Movieflix#readme"
+}
