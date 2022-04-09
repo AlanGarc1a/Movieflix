@@ -51,7 +51,7 @@ const Sidebar: React.FC = () => {
             {Links.map((link, index) => {
               return (
                 <MenuLinkItem key={index}>
-                  <MenuLink to={link.url}>
+                  <MenuLink to={link.url} active={true}>
                     <MenuIcon>{link.icon}</MenuIcon>
                     {link.title}
                   </MenuLink>
@@ -66,7 +66,7 @@ const Sidebar: React.FC = () => {
             {SearchLinks.map((link, index) => {
               return (
                 <MenuLinkItem key={index}>
-                  <MenuLink to={link.url}>
+                  <MenuLink to={link.url} active={true}>
                     <MenuIcon>{link.icon}</MenuIcon>
                     {link.title}
                   </MenuLink>
