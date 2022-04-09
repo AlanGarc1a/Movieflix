@@ -1,10 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-    @import url(
-        'https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@300;400;500;700&family=Roboto:wght@100;300;400;500;700;900&display=swap'
-    );
-
     :root {
         --primary: #050505;
         --secondary: #303F4C;
