@@ -1,5 +1,9 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+
+interface IMenuProps {
+  active?: boolean;
+}
 
 export const SidebarWrapper = styled.div`
   position: fixed;
@@ -47,13 +51,17 @@ export const MenuLinkItem = styled.div`
   margin-bottom: 1rem;
 `;
 
-export const MenuLink = styled(Link)`
+export const MenuLink = styled(NavLink)<IMenuProps>`
   display: inline-block;
   font-size: 1.7rem;
   font-weight: 500;
-  color: var(--light-grey);
   text-decoration: none;
   width: 100%;
+  color: var(--light-grey);
+  &.active {
+    border-right: 0.5rem solid var(--blue);
+    color: ${(props) => (props.active ? '#64848C' : undefined)};
+  }
 `;
 
 export const MenuIcon = styled.span`
