@@ -1,12 +1,18 @@
 import React from 'react';
-import { Nav, NavItem, NavItemLink, NavList } from './Navbar.styles';
+import {
+  Nav,
+  NavHome,
+  NavItem,
+  NavItemLink,
+  NavList,
+  NavMenu,
+} from './Navbar.styles';
 import {
   RiMovie2Line,
   RiSlideshow2Fill,
   RiStackLine,
   RiSearchLine,
 } from 'react-icons/ri';
-import { HeadingLink } from '../Text/Text';
 
 interface ILinks {
   title: string;
@@ -22,16 +28,21 @@ const Links: ILinks[] = [
   { title: 'Search for Show', url: '/tv-search', icon: <RiSearchLine /> },
 ];
 
-const Navbar: React.FC = () => {
+interface INavbarProps {
+  toggle: () => void;
+}
+
+const Navbar: React.FC<INavbarProps> = ({ toggle }) => {
   return (
     <>
       <Nav>
-        <HeadingLink to='/'>Movieflix</HeadingLink>
+        <NavMenu onClick={toggle} />
+        <NavHome to='/'>Movieflix</NavHome>
         <NavList>
           <NavItem>
             {Links.map((link, index) => {
               return (
-                <NavItemLink to={link.url} key={index}>
+                <NavItemLink to={link.url} key={index} onClick={toggle}>
                   {link.title}
                 </NavItemLink>
               );

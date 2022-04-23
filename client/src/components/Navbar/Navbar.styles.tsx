@@ -1,3 +1,4 @@
+import { RiMenuLine } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -10,7 +11,37 @@ export const Nav = styled.nav`
   z-index: 99;
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
+
+  @media only screen and (max-width: 30em) {
+    justify-content: center;
+  }
+`;
+
+export const NavHome = styled(NavLink)`
+  text-decoration: none;
+  font-size: 2rem;
+  margin: 1.8rem 3rem;
+  color: var(--white);
+  align-self: center;
+
+  &.active {
+    border-bottom: 0.2rem solid var(--white);
+  }
+`;
+
+export const NavMenu = styled(RiMenuLine)`
+  display: none;
+  font-size: 3rem;
+  align-self: center;
+  margin-left: 3rem;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+
+  @media only screen and (max-width: 30em) {
+    color: var(--white-grey);
+    display: block;
+  }
 `;
 
 export const NavList = styled.ul`
@@ -20,6 +51,10 @@ export const NavList = styled.ul`
   list-style-type: none;
   margin: 1.8rem 0rem;
   padding-right: 1.5rem;
+
+  @media only screen and (max-width: 30em) {
+    display: none;
+  }
 `;
 
 export const NavItem = styled.li``;
