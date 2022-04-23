@@ -17,4 +17,18 @@ export const TextField = styled.input`
     font-size: 3rem;
     font-weight: 700;
   }
+
+  @media only screen and (max-width: 30em) {
+    margin-top: 8rem;
+    padding: 1.2rem;
+    width: 90%;
+    margin-left: 3rem;
+  }
+
+  @media only screen and (min-width: 48em) and (max-width: 50.625em) {
+    margin-top: 8rem;
+    padding: 1.2rem;
+    width: 90%;
+    margin-left: 3rem;
+  }
 `;
