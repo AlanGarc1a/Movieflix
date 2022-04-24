@@ -7,7 +7,7 @@ export const ListContainer = styled.ul`
   margin-top: 1rem;
   margin-bottom: 15rem;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 48em) {
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -17,7 +17,10 @@ export const ListTitle = styled.span`
   display: inline-block;
   color: var(--primary);
   font-size: 2rem;
-  padding-left: 4rem;
+
+  @media only screen and (max-width: 30em) {
+    padding-left: 4rem;
+  }
 `;
 
 export const ListItem = styled.li`
