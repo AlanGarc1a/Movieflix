@@ -8,10 +8,10 @@ import {
   MenuLinks,
   MenuLinkItem,
   MenuLink,
+  MenuClose,
   MenuIcon,
 } from './Sidebar.styles';
 import {
-  RiCompassDiscoverLine,
   RiMovie2Line,
   RiSlideshow2Fill,
   RiStackLine,
@@ -24,15 +24,15 @@ interface ILinks {
   icon: JSX.Element;
 }
 
+interface ISidebarProps {
+  isOpen: boolean;
+  toggle: () => void;
+}
+
 const Links: ILinks[] = [
-  { title: 'Discover', url: '/', icon: <RiStackLine /> },
+  { title: 'Discover', url: '/discover', icon: <RiStackLine /> },
   { title: 'Popular Movies', url: '/popular-movies', icon: <RiMovie2Line /> },
   { title: 'Popular Shows', url: '/popular-shows', icon: <RiSlideshow2Fill /> },
-  {
-    title: 'Coming Soon',
-    url: '/coming-soon',
-    icon: <RiCompassDiscoverLine />,
-  },
 ];
 
 const SearchLinks: ILinks[] = [
@@ -40,18 +40,20 @@ const SearchLinks: ILinks[] = [
   { title: 'Search for Show', url: '/tv-search', icon: <RiSearchLine /> },
 ];
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<ISidebarProps> = ({ isOpen, toggle }) => {
   return (
-    <SidebarWrapper>
+    <SidebarWrapper isOpen={isOpen} onClick={toggle}>
+      <MenuClose onClick={toggle} />
       <Menu>
         <MenuItem>
-          <MenuTitle>Movieflix</MenuTitle>
+          <MenuTitle to='/'>Movieflix</MenuTitle>
+          <br />
           <MenuSub>Browse</MenuSub>
           <MenuLinks>
             {Links.map((link, index) => {
               return (
                 <MenuLinkItem key={index}>
-                  <MenuLink to={link.url} active={true}>
+                  <MenuLink to={link.url}>
                     <MenuIcon>{link.icon}</MenuIcon>
                     {link.title}
                   </MenuLink>
@@ -66,7 +68,7 @@ const Sidebar: React.FC = () => {
             {SearchLinks.map((link, index) => {
               return (
                 <MenuLinkItem key={index}>
-                  <MenuLink to={link.url} active={true}>
+                  <MenuLink to={link.url}>
                     <MenuIcon>{link.icon}</MenuIcon>
                     {link.title}
                   </MenuLink>
