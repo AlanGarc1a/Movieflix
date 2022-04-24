@@ -47,6 +47,10 @@ const GlobalStyle = createGlobalStyle`
         line-height: 1.7;
         font-weight: 400;
         font-family: 'Roboto', 'Oswald', 'Lato', sans-serif;
+
+        @media only screen and (max-width: 30em) {
+            overflow-x: hidden;
+        }
     }
 `;
 
