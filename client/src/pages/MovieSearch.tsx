@@ -42,9 +42,7 @@ const MovieSearch: React.FC = () => {
   const getSearchResults = async () => {
     try {
       if (term) {
-        const searchRes = await axios.get(
-          `http://localhost:8080/api/movie-search/${term}`
-        );
+        const searchRes = await axios.get(`/api/movie-search/${term}`);
 
         const { results } = searchRes.data;
         setSearchResults(results);

@@ -14,13 +14,9 @@ const Home: React.FC = () => {
 
   const getHomeItems = async () => {
     try {
-      const resMovies = await axios.get(
-        'http://localhost:8080/api/popular-movies'
-      );
+      const resMovies = await axios.get(`/api/popular-movies`);
 
-      const resShows = await axios.get(
-        'http://localhost:8080/api/popular-shows'
-      );
+      const resShows = await axios.get(`/api/popular-shows`);
 
       setPopularMovies(resMovies.data.items);
       setPopularShows(resShows.data.items);

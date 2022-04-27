@@ -35,13 +35,9 @@ const View: React.FC = () => {
 
   const getItem = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:8080/api/get-movie/${movieId}`
-      );
+      const res = await axios.get(`/api/get-movie/${movieId}`);
 
-      const posters = await axios.get(
-        `http://localhost:8080/api/posters/${movieId}`
-      );
+      const posters = await axios.get(`/api/posters/${movieId}`);
 
       const { data } = res;
 

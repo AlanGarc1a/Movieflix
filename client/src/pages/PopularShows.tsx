@@ -15,7 +15,7 @@ const PopularShows: React.FC = () => {
 
   const getMovies = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/api/popular-shows');
+      const res = await axios.get(`/api/popular-shows/`);
 
       const { items } = res.data;
       setMovies(items);

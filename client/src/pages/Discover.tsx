@@ -15,7 +15,7 @@ const Discover: React.FC = () => {
 
   const getMovies = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/api/discover');
+      const res = await axios.get(`/api/discover`);
 
       const { items } = res.data;
       setMovies(items);
