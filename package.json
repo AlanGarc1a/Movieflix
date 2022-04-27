@@ -4,7 +4,7 @@
   "description": "A web application for looking up movies and tv series",
   "main": "app.js",
   "scripts": {
-    "heroku-postbuild": "npm install",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
     "start": "node app.js",
     "dev": "set NODE_ENV=development&&nodemon app.js",
     "test": "jest test/movieRoutes.test.js"
