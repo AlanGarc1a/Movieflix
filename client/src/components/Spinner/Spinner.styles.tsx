@@ -13,6 +13,10 @@ export const SpinnerBox = styled.div`
   position: absolute;
   left: 40%;
   margin-top: 10rem;
+
+  @media only screen and (max-width: 30em) {
+    left: 35%;
+  }
 `;
 
 export const SpinnerCircle = styled.div`
