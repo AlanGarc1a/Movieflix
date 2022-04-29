@@ -10,14 +10,14 @@ export const Jumbo = styled.div<IJumboProps>`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  min-height: 52vh;
+  min-height: 55vh;
   overflow: hidden;
   top: 2%;
 
   &:before {
     content: '';
     position: absolute;
-    top: 0;
+    top: 5%;
     left: 0;
     width: 100%;
     height: 100%;
@@ -42,5 +42,6 @@ export const JumboOverlay = styled.div`
     height: 100%;
     background: linear-gradient(180deg, #040303, #5c5c5c);
     mix-blend-mode: overlay;
+    opacity: 0.8;
   }
 `;
