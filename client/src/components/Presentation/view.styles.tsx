@@ -62,7 +62,7 @@ export const ViewImage = styled.img`
   object-fit: cover;
   border-radius: 1rem;
   box-shadow: 0rem 0.8rem 1.8rem var(--primary);
-  transform: scale(1.5);
+  transform: scale(1.2);
 `;
 
 export const ViewAbout = styled.div`
