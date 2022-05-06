@@ -32,3 +32,19 @@ export const TextField = styled.input`
     margin-left: 3rem;
   }
 `;
+
+export const FormInput = styled.input`
+  width: 100%;
+  padding: 2rem 12rem 2rem 2rem;
+  border: none;
+  border-radius: 1rem;
+
+  &:focus {
+    outline: none;
+  }
+
+  &[type] {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+`;
