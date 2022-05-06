@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import GlobalStyle from './globalStyles';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
@@ -10,23 +10,76 @@ import View from './pages/View';
 import MovieSearch from './pages/MovieSearch';
 import ShowSearch from './pages/ShowSearch';
 import NotFound from './components/NotFound/NotFound';
+import SignUp from './pages/SignUp';
+import Login from './pages/Login';
+import CurrentUserContext, { IUserProps } from './context/authContext';
+import axios, { AxiosError } from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  const [user, setUser] = useState<IUserProps>({
+    username: null,
+    isLoggedIn: false,
+  });
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await axios.get('/api/users/isAuth', {
+          withCredentials: true,
+        });
+
+        setUser({
+          username: res.data.username,
+          isLoggedIn: true,
+        });
+      } catch (error) {
+        const err = error as AxiosError;
+
+        toast.error('Please login', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+        });
+        setUser({
+          isLoggedIn: false,
+        });
+      }
+    };
+    checkAuth();
+  }, []);
+
   return (
     <>
       <GlobalStyle />
-      <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path='discover' element={<Discover />} />
-          <Route path='popular-movies' element={<PopularMovies />} />
-          <Route path='popular-shows' element={<PopularShows />} />
-          <Route path=':movieTitle/:movieId' element={<View />} />
-          <Route path='movie-search' element={<MovieSearch />} />
-          <Route path='tv-search' element={<ShowSearch />} />
-          <Route path='*' element={<NotFound />} />
-        </Route>
-      </Routes>
+      {!user.isLoggedIn ? <ToastContainer /> : <></>}
+      <CurrentUserContext.Provider value={{ user, setUser }}>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            {user.isLoggedIn && (
+              <>
+                <Route index element={<Home />} />
+                <Route path='discover' element={<Discover />} />
+                <Route path='popular-movies' element={<PopularMovies />} />
+                <Route path='popular-shows' element={<PopularShows />} />
+                <Route path=':movieTitle/:movieId' element={<View />} />
+                <Route path='movie-search' element={<MovieSearch />} />
+                <Route path='tv-search' element={<ShowSearch />} />
+                <Route path='*' element={<NotFound />} />
+              </>
+            )}
+            <Route path='*' element={<NotFound />} />
+            {user.isLoggedIn || (
+              <>
+                <Route path='sign-up' element={<SignUp />} />
+                <Route path='login' element={<Login />} />
+              </>
+            )}
+          </Route>
+        </Routes>
+      </CurrentUserContext.Provider>
     </>
   );
 }
