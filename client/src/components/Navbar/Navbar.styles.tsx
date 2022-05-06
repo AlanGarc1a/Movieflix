@@ -11,6 +11,7 @@ export const Nav = styled.nav`
   z-index: 99;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   @media only screen and (max-width: 30em) {
     justify-content: center;
@@ -57,7 +58,13 @@ export const NavList = styled.ul`
   }
 `;
 
-export const NavItem = styled.li``;
+export const NavItem = styled.li`
+  list-style-type: none;
+  color: var(--white);
+  margin-right: 3rem;
+  font-size: 1.8rem;
+  position: relative;
+`;
 
 export const NavItemLink = styled(NavLink)`
   text-decoration: none;
@@ -73,3 +80,12 @@ export const NavItemLink = styled(NavLink)`
     border-bottom: 0.3rem solid var(--white);
   }
 `;
+
+export const NavRegister = styled.div`
+  margin-right: 4rem;
+  @media only screen and (max-width: 30em) {
+    display: none;
+  }
+`;
+
+export const UserLogin = styled(NavRegister)``;
