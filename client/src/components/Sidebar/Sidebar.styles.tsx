@@ -88,6 +88,12 @@ export const MenuLink = styled(NavLink)<IMenuProps>`
   }
 `;
 
+export const MenuLogoutLink = styled.div`
+  font-size: 1.7rem;
+  color: var(--light-grey);
+  cursor: pointer;
+`;
+
 export const MenuIcon = styled.span`
   margin-right: 1rem;
 `;
