@@ -28,16 +28,16 @@ const GlobalStyle = createGlobalStyle`
     html {
         font-size: 62.5%; //1rem = 10px 10px/16px = 62.5%;
     }
-
-    @media only screen and (max-width: 768px) {
+    
+    @media only screen and (max-width: 48em) {
         html {
             font-size: 50%; //1rem = 8px 8 /16
         }
     }
-
-    @media only screen and (max-width: 460px) {
+    
+    @media only screen and (max-width: 30em) {
         html {
-            font-size: 50%; //1rem = 8px  8 /16
+            font-size: 46.87%; //1rem = 7.5px  7.5/16
         }
     }
 
