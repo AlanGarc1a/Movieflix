@@ -10,7 +10,7 @@ const NotFound = () => {
         <NFoundCenter>
           whoops...this page is not available
           <br />
-          <LButton to='/discover'>Home</LButton>
+          <LButton to='/'>Home</LButton>
         </NFoundCenter>
       </NFound>
     </Container>
