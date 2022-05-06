@@ -13,6 +13,7 @@ const baseButton = css`
   border-color: var(--primary);
   background-color: var(--primary);
   text-decoration: none;
+  cursor: pointer;
 `;
 
 export const Button = styled.a`
@@ -21,4 +22,12 @@ export const Button = styled.a`
 
 export const LButton = styled(Link)`
   ${baseButton}
+`;
+
+export const SButton = styled.button`
+  ${baseButton}
+  background-color: var(--white-grey);
+  color: var(--primary);
+  width: 100%;
+  padding: 1.5rem 0rem;
 `;
