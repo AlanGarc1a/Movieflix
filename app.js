@@ -1,4 +1,4 @@
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
     require('dotenv').config();
 }
 const express = require('express');
@@ -8,12 +8,13 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 8080;
-const DB_URL = process.env.MONGO_URI || process.env.DB_TEST_URL;
+const DB_URL = process.env.MONGO_URI || process.env.DB_LOCAL_URL;
 
-mongoose.connect(DB_URL)
-    .then(() => console.log('Database connected'))
-    .catch(() => console.log('Error connecting to database'));
-
+if (process.env.NODE_ENV !== 'test') {
+    mongoose.connect(DB_URL)
+        .then(() => console.log('Database connected'))
+        .catch(() => console.log('Error connecting to database'));
+}
 
 const movieRoutes = require('./routes/movieRoutes');
 const userRoutes = require('./routes/userRoutes');
@@ -36,9 +37,10 @@ if (process.env.NODE_ENV === "production") {
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
     });
 }
-
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+        console.log(`Listening on port ${PORT}`);
+    });
+}
 
 module.exports = app;
