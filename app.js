@@ -20,7 +20,7 @@ const movieRoutes = require('./routes/movieRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 const config = {
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://movieflix17.herokuapp.com/'],
     credentials: true
 }
 
