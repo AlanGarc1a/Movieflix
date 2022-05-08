@@ -7,7 +7,7 @@
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
     "start": "node app.js",
     "dev": "set NODE_ENV=development&&nodemon app.js",
-    "test": "jest test/movieRoutes.test.js"
+    "test": "set NODE_ENV=test&&jest --runInBand --watchAll test/"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,11 @@
   "devDependencies": {
     "dotenv": "^16.0.0",
     "jest": "^27.5.1",
+    "mongodb-memory-server": "^8.5.2",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
