@@ -1,5 +1,7 @@
 const express = require('express');
 const axios = require('axios');
+const User = require('../models/User');
+
 const router = express.Router();
 
 router.get('/popular-movies', (req, res) => {
@@ -100,5 +102,43 @@ router.get('/show-search/:term', (req, res) => {
     })
 });
 
+router.post('/like-movie', async (req, res) => {
+    let { imdbId, imdbTitle, image, imdbRating, username } = req.body;
+    const foundUser = await User.findOne({ username })
+
+    if (foundUser) {
+        if (imdbRating === null) {
+            imdbRating = 0;
+        }
+        foundUser.likes.push({
+            imdbId,
+            imdbTitle,
+            image,
+            imdbRating
+        });
+
+        await foundUser.save();
+
+        return res.status(200).json({ isLiked: true });
+    }
+});
+
+router.post('/unlike-movie', async (req, res) => {
+    const { imdbId, username } = req.body;
+    const foundUser = await User.findOne({ username })
+    if (foundUser) {
+        foundUser.likes = foundUser.likes.filter(movie => {
+            return movie.imdbId !== imdbId
+        });
+
+        await foundUser.save();
+
+        return res.status(200).json({
+            isLiked: false
+        })
+    }
+
+    return res.status(401).json({ isLiked: false })
+});
 
 module.exports = router;
