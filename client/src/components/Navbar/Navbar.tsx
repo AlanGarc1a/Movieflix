@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import {
   Nav,
   NavHome,
+  NavIcon,
   NavItem,
   NavItemLink,
   NavList,
@@ -30,8 +31,8 @@ const Links: ILinks[] = [
   { title: 'Discover', url: '/discover', icon: <RiStackLine /> },
   { title: 'Popular Movies', url: '/popular-movies', icon: <RiMovie2Line /> },
   { title: 'Popular Shows', url: '/popular-shows', icon: <RiSlideshow2Fill /> },
-  { title: 'Search for Movie', url: '/movie-search', icon: <RiSearchLine /> },
-  { title: 'Search for Show', url: '/tv-search', icon: <RiSearchLine /> },
+  { title: 'Movie', url: '/movie-search', icon: <RiSearchLine /> },
+  { title: 'Show', url: '/tv-search', icon: <RiSearchLine /> },
 ];
 
 interface INavbarProps {
@@ -81,6 +82,7 @@ const Navbar: React.FC<INavbarProps> = ({ toggle }) => {
               {Links.map((link, index) => {
                 return (
                   <NavItemLink to={link.url} key={index} onClick={toggle}>
+                    <NavIcon>{link.icon}</NavIcon>
                     {link.title}
                   </NavItemLink>
                 );
