@@ -28,6 +28,8 @@ describe('User Schema', () => {
         expect(savedUser._id).toBeDefined();
         expect(savedUser.email).toBe(userData.email);
         expect(savedUser.username).toBeDefined();
+        expect(savedUser.likes).toBeDefined();
+        expect(savedUser.likes.length).toBe(0);
     });
 
     it('should fail when an unknown field is added to schema', async () => {
