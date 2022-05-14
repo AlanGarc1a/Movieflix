@@ -1,3 +1,4 @@
+import { RiHeartLine } from 'react-icons/ri';
 import styled from 'styled-components';
 
 export const CenterView = styled.div`
@@ -77,8 +78,49 @@ export const ViewHeader = styled.div`
 
 export const ViewTitle = styled.span`
   display: inline-block;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 500;
+  display: flex;
+`;
+
+export const ViewLike = styled.span`
+  display: inline-block;
+  padding: 0.5rem 0rem 0rem 1.5rem;
+  cursor: pointer;
+  transform: translateY(0);
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    transform: translateY(-0.2rem);
+    transition: all 0.2s ease-in;
+  }
+`;
+
+export const ViewLiked = styled.span`
+  display: inline-block;
+  padding: 0.5rem 0rem 0rem 1.5rem;
+  cursor: pointer;
+  position: relative;
+  transform: translateY(0);
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    transform: translateY(-0.2rem);
+    transition: all 0.2s ease-in;
+    &::after {
+      content: 'unlike';
+      position: absolute;
+      font-size: 1.5rem;
+      top: -20%;
+      left: 15%;
+    }
+  }
+`;
+
+export const FillHeart = styled(RiHeartLine)`
+  &:hover {
+    color: red;
+  }
 `;
 
 export const ViewText = styled.span`
