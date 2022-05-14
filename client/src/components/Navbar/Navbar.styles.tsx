@@ -88,4 +88,13 @@ export const NavRegister = styled.div`
   }
 `;
 
-export const UserLogin = styled(NavRegister)``;
+export const UserLogin = styled(NavRegister)`
+  @media only screen and (min-width: 50.625em) {
+    margin-right: 0rem;
+  }
+`;
+
+export const NavIcon = styled.span`
+  font-size: 1.4rem;
+  padding-right: 0.4rem;
+`;
