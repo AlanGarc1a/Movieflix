@@ -1,6 +1,6 @@
 import React from 'react';
 import { IMovie } from '../../schemas/Movie';
-import { ListContainer, ListItem, ListTitle } from './List.styles';
+import { ListContainer, ListItem, ListTitle, ListHeader } from './List.styles';
 import Card from '../Card/Card';
 
 interface IListProps {
@@ -12,7 +12,9 @@ interface IListProps {
 const List: React.FC<IListProps> = ({ itemsToDisplay, items, title }) => {
   return (
     <>
-      <ListTitle>{title}</ListTitle>
+      <ListHeader>
+        <ListTitle>{title}</ListTitle>
+      </ListHeader>
       <ListContainer>
         {items.slice(0, itemsToDisplay).map((item) => {
           return (
