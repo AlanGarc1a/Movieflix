@@ -125,4 +125,26 @@ router.get('/isAuth', async (req, res) => {
     }
 });
 
+router.get('/liked-movie/:imdbId', async (req, res) => {
+    const { imdbId } = req.params;
+    const token = req.cookies.token;
+
+    const data = verifyToken(token);
+
+    const foundUser = await User.findById(data.id);
+
+    const foundMovie = foundUser.likes.find(movie => {
+        return movie.imdbId === imdbId
+    });
+
+    if (foundMovie) {
+        return res.status(200).json({
+            isLiked: true
+        });
+    }
+
+    return res.status(200).json({ isLiked: false });
+});
+
+
 module.exports = router;
