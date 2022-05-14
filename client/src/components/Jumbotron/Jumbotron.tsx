@@ -1,16 +1,24 @@
 import React from 'react';
 
-import { Jumbo, JumboOverlay } from './Jumbotron.styles';
+import { DarkJumbo, Jumbo, JumboOverlay } from './Jumbotron.styles';
 
 interface IJumbotronProps {
   bgImage?: string;
 }
 
 const Jumbotron: React.FC<IJumbotronProps> = ({ bgImage }) => {
+  console.log(bgImage);
+
   return (
-    <Jumbo bgImage={bgImage}>
-      <JumboOverlay></JumboOverlay>
-    </Jumbo>
+    <>
+      {bgImage === undefined ? (
+        <DarkJumbo></DarkJumbo>
+      ) : (
+        <Jumbo bgImage={bgImage}>
+          <JumboOverlay></JumboOverlay>
+        </Jumbo>
+      )}
+    </>
   );
 };
 
