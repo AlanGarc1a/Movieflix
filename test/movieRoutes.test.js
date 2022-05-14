@@ -1,5 +1,24 @@
 const request = require('supertest');
 const app = require('../app');
+const User = require('../models/User');
+const { generateToken } = require('../utils/helpers');
+const db = require('./db');
+
+
+//executed before ou test suites
+beforeAll(async () => await db.connect());
+
+//runs after each test suite
+afterEach(async () => await db.dropCollections());
+
+//executed after all test suites have finished
+afterAll(async () => await db.dropDatabase());
+
+const userData = {
+    email: 'test@test.com',
+    username: 'test',
+    password: 'password'
+}
 
 describe('API routes', () => {
     it('should return a list of 250 movies', async () => {
@@ -52,5 +71,30 @@ describe('API routes', () => {
         expect(res.header['content-type']).toBe('application/json; charset=utf-8');
         expect(res.body.searchType).toBe('Series');
         expect(res.body.expression).toBe(term);
+    })
+
+    it('should like the movie', async () => {
+        await request(app).post('/api/users/register').send(userData);
+        const media = {
+            imdbId: '1',
+            imdbTitle: 'Dragon',
+            image: 'image-string',
+            imdbRating: '10',
+            username: userData.username
+        }
+
+        const res = await request(app).post('/api/like-movie').send(media)
+        expect(res.body.isLiked).toBe(true)
+    })
+
+    it('should un-like the movie', async () => {
+        await request(app).post('/api/users/register').send(userData);
+        const media = {
+            imdbId: '1',
+            username: userData.username
+        }
+
+        const res = await request(app).post('/api/unlike-movie').send(media)
+        expect(res.body.isLiked).toBe(false);
     })
 });
