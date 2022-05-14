@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { IMovie } from '../schemas/Movie';
 import {
@@ -16,22 +16,32 @@ import {
   ViewCast,
   CenterView,
   Credit,
+  ViewLike,
+  ViewLiked,
+  FillHeart,
 } from '../components/Presentation/view.styles';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import Jumbotron from '../components/Jumbotron/Jumbotron';
 import { IPosters } from '../schemas/Posters';
 import { Button } from '../components/Button/Button';
 import Spinner from '../components/Spinner/Spinner';
 import Container from '../components/Container/Container';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { RiHeartFill } from 'react-icons/ri';
+import CurrentUserContext from '../context/authContext';
 
 const View: React.FC = () => {
   const [item, setItem] = useState<IMovie>();
   const [posters, setPosters] = useState<IPosters>();
   const [loading, setLoading] = useState<boolean>(true);
   const [errorRedirect, setError] = useState<boolean>(false);
+  const [like, setLike] = useState<boolean>(false);
 
   const { movieId } = useParams();
+
+  let navigate = useNavigate();
+
+  const currentUser = useContext(CurrentUserContext);
 
   const getItem = async () => {
     try {
@@ -39,15 +49,64 @@ const View: React.FC = () => {
 
       const posters = await axios.get(`/api/posters/${movieId}`);
 
+      const likedMovie = await axios.get(`/api/users/liked-movie/${movieId}`);
+
       const { data } = res;
 
       setItem(data);
-      setPosters(posters.data.backdrops[2]);
+      setPosters(posters.data.backdrops[0]);
       setLoading(false);
+      setLike(likedMovie.data.isLiked);
     } catch (error) {
+      setLike(false);
       setError(true);
       if (errorRedirect) {
-        return <Navigate to='*' replace />;
+        navigate('/');
+      }
+    }
+  };
+
+  const showRedHeart = async () => {
+    try {
+      const movieData = {
+        imdbId: item?.id,
+        imdbTitle: item?.title,
+        image: item?.image,
+        imdbRating: item?.imDbRating,
+        username: currentUser?.user?.username,
+      };
+      const sendLikedMovie = await axios.post('/api/like-movie', movieData);
+
+      setLike(sendLikedMovie.data.isLiked);
+    } catch (error) {
+      const err = error as AxiosError;
+      setError(true);
+      setLike(false);
+      if (errorRedirect) {
+        navigate('/');
+      }
+    }
+  };
+
+  const showEmptyHeart = async () => {
+    try {
+      const movieData = {
+        imdbId: item?.id,
+        imdbTitle: item?.title,
+        image: item?.image,
+        imdbRating: item?.imDbRating,
+        username: currentUser?.user?.username,
+      };
+      const sendLikedMovie = await axios.post('/api/unlike-movie', movieData, {
+        withCredentials: true,
+      });
+
+      setLike(sendLikedMovie.data.isLiked);
+    } catch (error) {
+      const err = error as AxiosError;
+      setError(true);
+      if (errorRedirect) {
+        navigate('/');
       }
     }
   };
@@ -73,10 +132,19 @@ const View: React.FC = () => {
               <ViewItem>
                 <ViewAbout>
                   <ViewHeader>
-                    <ViewTitle>{item?.title}</ViewTitle>
-                    <ViewRating>
-                      {item?.imDbRating ? item.imDbRating : 0}
-                    </ViewRating>
+                    <ViewTitle>
+                      {item?.title}
+                      {like ? (
+                        <ViewLiked onClick={showEmptyHeart}>
+                          <RiHeartFill style={{ color: 'red' }} />
+                        </ViewLiked>
+                      ) : (
+                        <ViewLike onClick={showRedHeart}>
+                          <FillHeart />
+                        </ViewLike>
+                      )}
+                    </ViewTitle>
+                    <ViewRating>{item?.imDbRating}</ViewRating>
                   </ViewHeader>
                   <ViewList>
                     <ViewText>
