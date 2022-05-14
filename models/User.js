@@ -18,7 +18,15 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    likes: [
+        {
+            imdbId: String,
+            imdbTitle: String,
+            image: String,
+            imdbRating: { type: Number, default: 0 }
+        }
+    ]
 });
 
 UserSchema.methods.matchPassword = async function (enteredPassword) {
