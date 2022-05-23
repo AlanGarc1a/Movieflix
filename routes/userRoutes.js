@@ -125,8 +125,8 @@ router.get('/isAuth', async (req, res) => {
     }
 });
 
-router.get('/liked-movie/:imdbId', async (req, res) => {
-    const { imdbId } = req.params;
+router.get('/liked-movie/:id', async (req, res) => {
+    const { id } = req.params;
     const token = req.cookies.token;
 
     const data = verifyToken(token);
@@ -134,7 +134,7 @@ router.get('/liked-movie/:imdbId', async (req, res) => {
     const foundUser = await User.findById(data.id);
 
     const foundMovie = foundUser.likes.find(movie => {
-        return movie.imdbId === imdbId
+        return movie.id === id
     });
 
     if (foundMovie) {
@@ -144,6 +144,20 @@ router.get('/liked-movie/:imdbId', async (req, res) => {
     }
 
     return res.status(200).json({ isLiked: false });
+});
+
+router.get('/liked-movies', async (req, res) => {
+    const token = req.cookies.token;
+
+    const data = verifyToken(token);
+
+    const foundUser = await User.findOne({ username: data.username });
+
+    if (foundUser) {
+        return res.status(200).json(foundUser.likes);
+    } else {
+        return res.status(401).json({ msg: 'Something went wrong' });
+    }
 });
 
 
