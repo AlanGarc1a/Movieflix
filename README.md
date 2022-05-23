@@ -6,6 +6,11 @@ Movieflix is a web application that uses the IMDB API to display movies and tv s
 
 To create a web application using the IMDB API. I was looking around on the dribble website for movie streaming design and saw a design that I really liked and wanted to take that design and build it using React.js. Also, I wanted to learn how to use TypeScript with React.js.
 
+# Features
+
+- User can like their favorites movies.
+- User can search for a movie/show title.
+
 # Technologies
 
 ### FrontEnd
