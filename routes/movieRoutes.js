@@ -103,18 +103,18 @@ router.get('/show-search/:term', (req, res) => {
 });
 
 router.post('/like-movie', async (req, res) => {
-    let { imdbId, imdbTitle, image, imdbRating, username } = req.body;
+    let { id, title, image, imDbRating, username } = req.body;
     const foundUser = await User.findOne({ username })
 
     if (foundUser) {
-        if (imdbRating === null) {
-            imdbRating = 0;
+        if (imDbRating === null) {
+            imDbRating = 0;
         }
         foundUser.likes.push({
-            imdbId,
-            imdbTitle,
+            id,
+            title,
             image,
-            imdbRating
+            imDbRating
         });
 
         await foundUser.save();
@@ -124,11 +124,11 @@ router.post('/like-movie', async (req, res) => {
 });
 
 router.post('/unlike-movie', async (req, res) => {
-    const { imdbId, username } = req.body;
+    const { id, username } = req.body;
     const foundUser = await User.findOne({ username })
     if (foundUser) {
         foundUser.likes = foundUser.likes.filter(movie => {
-            return movie.imdbId !== imdbId
+            return movie.id !== id
         });
 
         await foundUser.save();
