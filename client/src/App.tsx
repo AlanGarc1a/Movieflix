@@ -12,8 +12,9 @@ import ShowSearch from './pages/ShowSearch';
 import NotFound from './components/NotFound/NotFound';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 import CurrentUserContext, { IUserProps } from './context/authContext';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -35,8 +36,6 @@ function App() {
           isLoggedIn: true,
         });
       } catch (error) {
-        const err = error as AxiosError;
-
         toast.error('Please login', {
           position: 'top-right',
           autoClose: 3000,
@@ -68,6 +67,9 @@ function App() {
                 <Route path='movie-search' element={<MovieSearch />} />
                 <Route path='tv-search' element={<ShowSearch />} />
                 <Route path='*' element={<NotFound />} />
+                <Route path='profile'>
+                  <Route path='likes' element={<Profile />} />
+                </Route>
               </>
             )}
             <Route path='*' element={<NotFound />} />
