@@ -82,6 +82,7 @@ export const MenuLink = styled(NavLink)<IMenuProps>`
   text-decoration: none;
   width: 100%;
   color: var(--light-grey);
+  margin-bottom: 1rem;
   &.active {
     border-right: 0.5rem solid var(--blue);
     color: ${(props) => (props.active ? '' : '#64848C')};
@@ -92,6 +93,7 @@ export const MenuLogoutLink = styled.div`
   font-size: 1.7rem;
   color: var(--light-grey);
   cursor: pointer;
+  margin-bottom: 2rem;
 `;
 
 export const MenuIcon = styled.span`

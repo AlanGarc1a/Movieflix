@@ -122,12 +122,12 @@ const Sidebar: React.FC<ISidebarProps> = ({ isOpen, toggle }) => {
             <MenuSub>General</MenuSub>
             <MenuLinks>
               <MenuLinkItem>
-                <MenuLogoutLink>
+                <MenuLink to='profile/likes'>
                   <MenuIcon>
                     <RiUserFill />
                   </MenuIcon>
                   {user.username}
-                </MenuLogoutLink>
+                </MenuLink>
               </MenuLinkItem>
               <MenuLinkItem onClick={handleLogout}>
                 <MenuLogoutLink>
