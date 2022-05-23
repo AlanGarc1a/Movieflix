@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Nav,
   NavHome,
@@ -8,13 +8,18 @@ import {
   NavList,
   NavMenu,
   NavRegister,
+  UserIcon,
   UserLogin,
+  UserSubMenu,
+  UserProfile,
 } from './Navbar.styles';
 import {
   RiMovie2Line,
   RiSlideshow2Fill,
   RiStackLine,
   RiSearchLine,
+  RiLogoutBoxRLine,
+  RiHeartFill,
 } from 'react-icons/ri';
 import CurrentUserContext from '../../context/authContext';
 import { useNavigate } from 'react-router-dom';
@@ -41,6 +46,7 @@ interface INavbarProps {
 
 const Navbar: React.FC<INavbarProps> = ({ toggle }) => {
   const currentUser = useContext(CurrentUserContext);
+  const [openSubMenu, setOpenSubMenu] = useState<boolean>(false);
 
   let navigate = useNavigate();
 
@@ -49,7 +55,12 @@ const Navbar: React.FC<INavbarProps> = ({ toggle }) => {
   }
   const { user, setUser } = currentUser;
 
+  const userSubMenu = () => {
+    setOpenSubMenu(!openSubMenu);
+  };
+
   const handleLogout = async () => {
+    setOpenSubMenu(!openSubMenu);
     try {
       const res = await axios.get('/api/users/logout', {
         withCredentials: true,
@@ -97,28 +108,23 @@ const Navbar: React.FC<INavbarProps> = ({ toggle }) => {
           </NavRegister>
         ) : (
           <UserLogin>
-            <span
-              style={{
-                fontSize: '1.8rem',
-                color: 'var(--white)',
-                marginRight: '1rem',
-                cursor: 'pointer',
-              }}
-            >
-              {user.username}
-            </span>
-            <span
-              style={{
-                fontSize: '1.8rem',
-                color: 'var(--white)',
-                marginRight: '3rem',
-                marginLeft: '3rem',
-                cursor: 'pointer',
-              }}
-              onClick={handleLogout}
-            >
-              logout
-            </span>
+            <UserIcon onClick={userSubMenu}>{user?.username}</UserIcon>
+            {openSubMenu ? (
+              <UserSubMenu open={openSubMenu}>
+                <div>
+                  <UserProfile to='/profile/likes' onClick={userSubMenu}>
+                    <RiHeartFill />
+                    My Likes
+                  </UserProfile>
+                  <span onClick={handleLogout}>
+                    <RiLogoutBoxRLine />
+                    logout
+                  </span>
+                </div>
+              </UserSubMenu>
+            ) : (
+              <></>
+            )}
           </UserLogin>
         )}
       </Nav>
