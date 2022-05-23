@@ -20,7 +20,7 @@ import {
   ViewLiked,
   FillHeart,
 } from '../components/Presentation/view.styles';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import Jumbotron from '../components/Jumbotron/Jumbotron';
 import { IPosters } from '../schemas/Posters';
 import { Button } from '../components/Button/Button';
@@ -69,17 +69,16 @@ const View: React.FC = () => {
   const showRedHeart = async () => {
     try {
       const movieData = {
-        imdbId: item?.id,
-        imdbTitle: item?.title,
+        id: item?.id,
+        title: item?.title,
         image: item?.image,
-        imdbRating: item?.imDbRating,
+        imDbRating: item?.imDbRating,
         username: currentUser?.user?.username,
       };
       const sendLikedMovie = await axios.post('/api/like-movie', movieData);
 
       setLike(sendLikedMovie.data.isLiked);
     } catch (error) {
-      const err = error as AxiosError;
       setError(true);
       setLike(false);
       if (errorRedirect) {
@@ -91,10 +90,10 @@ const View: React.FC = () => {
   const showEmptyHeart = async () => {
     try {
       const movieData = {
-        imdbId: item?.id,
-        imdbTitle: item?.title,
+        id: item?.id,
+        title: item?.title,
         image: item?.image,
-        imdbRating: item?.imDbRating,
+        imDbRating: item?.imDbRating,
         username: currentUser?.user?.username,
       };
       const sendLikedMovie = await axios.post('/api/unlike-movie', movieData, {
@@ -103,7 +102,6 @@ const View: React.FC = () => {
 
       setLike(sendLikedMovie.data.isLiked);
     } catch (error) {
-      const err = error as AxiosError;
       setError(true);
       if (errorRedirect) {
         navigate('/');
