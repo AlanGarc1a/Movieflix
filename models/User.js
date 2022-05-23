@@ -21,10 +21,10 @@ const UserSchema = new Schema({
     },
     likes: [
         {
-            imdbId: String,
-            imdbTitle: String,
-            image: String,
-            imdbRating: { type: Number, default: 0 }
+            id: { type: String },
+            title: { type: String },
+            image: { type: String },
+            imDbRating: { type: Number, default: 0 }
         }
     ]
 });
