@@ -7,8 +7,6 @@ interface IJumbotronProps {
 }
 
 const Jumbotron: React.FC<IJumbotronProps> = ({ bgImage }) => {
-  console.log(bgImage);
-
   return (
     <>
       {bgImage === undefined ? (
