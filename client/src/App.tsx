@@ -17,6 +17,7 @@ import CurrentUserContext, { IUserProps } from './context/authContext';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Landing from './pages/Landing';
 
 function App() {
   const [user, setUser] = useState<IUserProps>({
@@ -59,7 +60,7 @@ function App() {
           <Route path='/' element={<Layout />}>
             {user.isLoggedIn && (
               <>
-                <Route index element={<Home />} />
+                <Route path='/' element={<Home />} />
                 <Route path='discover' element={<Discover />} />
                 <Route path='popular-movies' element={<PopularMovies />} />
                 <Route path='popular-shows' element={<PopularShows />} />
@@ -75,6 +76,7 @@ function App() {
             <Route path='*' element={<NotFound />} />
             {user.isLoggedIn || (
               <>
+                <Route index element={<Landing />} />
                 <Route path='sign-up' element={<SignUp />} />
                 <Route path='login' element={<Login />} />
               </>
