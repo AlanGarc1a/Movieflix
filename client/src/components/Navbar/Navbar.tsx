@@ -76,7 +76,7 @@ const Navbar: React.FC<INavbarProps> = ({ toggle }) => {
           closeOnClick: true,
         });
       }
-      navigate('/sign-up');
+      navigate('/');
     } catch (error) {
       navigate('/sign-up');
     }
